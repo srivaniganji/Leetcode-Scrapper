@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LeetCode Problems</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      .problem {
+        margin-bottom: 15px;
+      }
+      .problem a {
+        text-decoration: none;
+        color: #0073e6;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>LeetCode Problems</h1>
+    <div id="problems"></div>
+
+    <script>
+      async function loadProblems() {
+        const response = await fetch("/data");
+        const problems = await response.json();
+        const problemsDiv = document.getElementById("problems");
+
+        problems.forEach((problem, index) => {
+          const problemDiv = document.createElement("div");
+          problemDiv.classList.add("problem");
+          problemDiv.innerHTML = `<strong>${index + 1}. <a href="${
+            problem.link
+          }" target="_blank">${problem.title}</a></strong>`;
+          problemsDiv.appendChild(problemDiv);
+        });
+      }
+
+      loadProblems();
+    </script>
+  </body>
+</html>
